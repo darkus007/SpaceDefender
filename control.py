@@ -3,12 +3,13 @@ import pygame
 from bullet import Bullet
 
 
-def events(screen, player, bullets):
+def events(screen, player, bullets, status):
 
     for event in pygame.event.get():        # получаем все события
 
         if event.type == pygame.QUIT:
-            sys.exit()
+            # sys.exit()
+            status.in_game = False
 
         if event.type == pygame.KEYDOWN:
 

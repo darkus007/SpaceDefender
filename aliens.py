@@ -5,7 +5,7 @@ from pygame.sprite import Sprite
 
 class Alien(Sprite):
 
-    speed = 0.1
+    speed = 0.08
 
     def __init__(self, screen):
         super(Alien, self).__init__()

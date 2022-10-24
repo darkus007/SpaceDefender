@@ -2,7 +2,7 @@ import pygame
 from pygame.sprite import Group
 
 # наследуем от класса Sprite - предназначен для отображения анимированных объектов
-from score import Score
+from text import Text
 
 
 class Bullet(pygame.sprite.Sprite):
@@ -13,7 +13,8 @@ class Bullet(pygame.sprite.Sprite):
 
         # создаем пулю
         self.rect = pygame.Rect(0, 0, 2, 12)  # размер
-        self.color = 139, 195, 74  # цвет
+        # self.color = 139, 195, 74  # цвет
+        self.color = 255, 0, 0  # цвет
         self.speed = 3
 
         # начальное положение пули от положения игрока
@@ -26,9 +27,9 @@ class Bullet(pygame.sprite.Sprite):
         if self.rect.y < 0:
             self.is_alive = False
 
-    # переопределение метода из класса Sprite для отрисовки пуль
+    # переопределение метода класса Sprite для отрисовки пуль
     def update(self):
-        """ Рисует пулю и проверяет коллизию с пришельцами """
+        """ Рисует пулю """
         self._move()
         pygame.draw.rect(self.screen, self.color, self.rect)
 
@@ -40,7 +41,7 @@ class Bullet(pygame.sprite.Sprite):
                 bullets.remove(bullet)
 
     @staticmethod
-    def check_collision_and_remove_objects(aliens: Group, bullets: Group, score: Score) -> None:
+    def check_collision_and_remove_objects(aliens: Group, bullets: Group, score: Text) -> None:
         """ Проверяет коллизию между пулями и пришельцами, при ее наличии удаляет пулю и пришельца """
         # создает словарь Dict[bullets: aliens]; ключи True, True - означают удалять и пулю и пришельца
         collisions = pygame.sprite.groupcollide(bullets, aliens, True, True)
