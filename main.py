@@ -4,11 +4,8 @@
 """
 
 import pygame
-from pygame.sprite import Group     # контейнер
-
 import control
 from bullet import Bullet
-from player import Player
 from game_logic import *
 from text import Text
 

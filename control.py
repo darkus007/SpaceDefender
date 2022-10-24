@@ -1,13 +1,18 @@
-import sys
+"""
+Модуль для обработки действий игрока
+(перемещение, стрельба, выход из игры).
+"""
+
 import pygame
 from bullet import Bullet
 
 
 def events(screen, player, bullets, status):
+    """ Обработка действий игрока. """
 
-    for event in pygame.event.get():        # получаем все события
+    for event in pygame.event.get():  # получаем все события
 
-        if event.type == pygame.QUIT:
+        if event.type == pygame.QUIT:  # выход из игры
             # sys.exit()
             status.in_game = False
 

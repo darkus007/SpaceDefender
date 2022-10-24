@@ -1,8 +1,20 @@
-from aliens import Alien
+"""
+Модуль отвечает за хранение состояния игры,
+содержит игровую логику,
+сохраняет и читает рекорды игры.
+"""
+
+from pygame import Surface
+from pygame.sprite import Group
 from os.path import isfile
+
+from aliens import Alien
+from player import Player
 
 
 class Status:
+    """ Класс для хранения состояния игры. """
+
     def __init__(self, player_lives):
         self.in_game = True
         self.game_level = 1
@@ -10,15 +22,17 @@ class Status:
         self.player_life = player_lives
 
 
-def new_game(screen, status, player, aliens, bullets, is_win):
+def new_game(screen: Surface, status: Status, player: Player, aliens: Group,
+             bullets: Group, is_win: bool) -> None:
     """
-    Создает новую игру
-    :param screen: Экземпляр класса pygame.Surface.
-    :param status:
-    :param player:
-    :param aliens:
-    :param bullets:
-    :param is_win:
+    Создает новую игру.
+
+    :param screen: Окно для отрисовки игры (экземпляр класса pygame.Surface).
+    :param status: Класс для хранения состояния игры.
+    :param player: Игрок.
+    :param aliens: Контейнер (pygame.sprite.Group) с пришельцами.
+    :param bullets: Контейнер (pygame.sprite.Group) с пулями.
+    :param is_win: Игрок победил?
     """
     if is_win:
         status.game_level += 1
@@ -33,7 +47,7 @@ def new_game(screen, status, player, aliens, bullets, is_win):
 
 
 def get_hi_score() -> int:
-    """ Читает рекорд прошлых игр из файла """
+    """ Читает рекорд прошлых игр из файла. """
     if isfile('res/hiscore'):
         with open('res/hiscore', 'r') as file:
             hi_score = int(file.read())
@@ -42,6 +56,6 @@ def get_hi_score() -> int:
 
 
 def save_hi_score(hi_score: int | str) -> None:
-    """ Сохраняет рекорд в файл """
+    """ Сохраняет рекорд в файл. """
     with open('res/hiscore', 'w') as file:
         file.write(str(hi_score))

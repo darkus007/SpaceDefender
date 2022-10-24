@@ -1,12 +1,30 @@
+"""
+Модуль отвечает за создание и отображение пуль.
+Проверяет коллизию между пулями и пришельцами, при ее наличии удаляет пулю и пришельца.
+"""
+
 import pygame
-from pygame.sprite import Group
+from pygame import Surface
+from pygame.sprite import Group, Sprite
 
-# наследуем от класса Sprite - предназначен для отображения анимированных объектов
 from text import Text
+from player import Player
 
 
-class Bullet(pygame.sprite.Sprite):
-    def __init__(self, screen, player):
+class Bullet(Sprite):
+    """
+    Создает пулю.
+
+    Наследуется от класса pygame.sprite.Sprite, что позволяет добавлять его
+    в класс - контейнер pygame.sprite.Group.
+    Класс Group имеет метод update(), который вызывает аналогичный метод
+    update() для каждого члена класса.
+
+    :param screen: Окно для отрисовки игры (экземпляр класса pygame.Surface).
+    :param player: Игрок, используется для вычисления начальной позиции пули.
+    """
+
+    def __init__(self, screen: Surface, player: Player):
         super(Bullet, self).__init__()
         self.screen = screen
         self.is_alive = True
@@ -46,5 +64,3 @@ class Bullet(pygame.sprite.Sprite):
         # создает словарь Dict[bullets: aliens]; ключи True, True - означают удалять и пулю и пришельца
         collisions = pygame.sprite.groupcollide(bullets, aliens, True, True)
         score.value += len(collisions.values())  # увеличивает счет на количество пораженных пришельцев
-
-

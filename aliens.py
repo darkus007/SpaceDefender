@@ -1,13 +1,26 @@
+"""
+Модуль отвечает за создание и отображение пришельцев.
+"""
+
 from pygame import Surface, image
-from pygame.sprite import Group
-from pygame.sprite import Sprite
+from pygame.sprite import Group, Sprite
 
 
 class Alien(Sprite):
+    """
+    Создает пришельца.
+
+    Наследуется от класса pygame.sprite.Sprite, что позволяет добавлять его
+    в класс - контейнер pygame.sprite.Group.
+    Класс Group имеет метод update(), который вызывает аналогичный метод
+    update() для каждого члена класса.
+
+    :param screen: Окно для отрисовки игры (экземпляр класса pygame.Surface).
+    """
 
     speed = 0.08
 
-    def __init__(self, screen):
+    def __init__(self, screen: Surface):
         super(Alien, self).__init__()
         self.screen = screen
         self.image = image.load('res/alien.png')
@@ -19,21 +32,21 @@ class Alien(Sprite):
         self.y = float(self.rect.y)
 
     def _move_alien(self):
-        """ Перемещает пришельца """
+        """ Перемещает пришельца. """
         self.y += self.speed
         self.rect.y = self.y
 
     def update(self):
-        """ Рисует пришельца """
+        """ Рисует пришельца. """
         self._move_alien()
         self.screen.blit(self.image, self.rect)
 
     @staticmethod
     def create_aliens_army(screen: Surface, aliens_container: Group) -> None:
-        """ Создает армию пришельцев """
-        space_between_aliens_x = 4    # px
-        space_between_aliens_y = 20   # px
-        rows_aliens = 4               # штук
+        """ Создает армию пришельцев. """
+        space_between_aliens_x = 4  # px
+        space_between_aliens_y = 20  # px
+        rows_aliens = 4  # штук
 
         alien_width = Alien(screen).alien_width
         number_aliens_on_x = int((screen.get_rect().width - 2 * alien_width) / alien_width)
@@ -49,7 +62,7 @@ class Alien(Sprite):
 
     @staticmethod
     def check_end_screen(screen: Surface, aliens_container: Group) -> bool:
-        """ Проверяет дошли ли пришельцы до конца экрана """
+        """ Проверяет дошли ли пришельцы до конца экрана. """
         screen_bottom = screen.get_rect().bottom
         for alien in aliens_container:
             if alien.rect.bottom >= screen_bottom:

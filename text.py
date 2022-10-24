@@ -1,3 +1,8 @@
+"""
+Модуль отвечает за вывод информации на экран
+(SCORE, HI SCORE, LIVES, LEVEL)
+"""
+
 import pygame.font
 from pygame import Surface
 from typing import Literal
@@ -7,11 +12,12 @@ class Text:
     """
     Выводит информацию на экран.
 
-    :param screen: Экземпляр класса pygame.Surface.
+    :param screen: Окно для отрисовки игры (экземпляр класса pygame.Surface).
     :param prefix: Подпись к выводимой информации (например "SCORE:").
     :param value: Выводимая информация.
     :param position: Положение на экране, допустимые значения "left", "center", "right".
     """
+
     def __init__(self, screen: Surface, prefix: str, value: int, position: Literal["left", "center", "right"]):
         self.value = value
         self.position = position
@@ -23,7 +29,7 @@ class Text:
         self.text_to_image()
 
     def text_to_image(self):
-        """ Преобразует текст в графическое изображение """
+        """ Преобразует текст в графическое изображение. """
         self.text_img = self.font.render(self.prefix + str(self.value), True, self.text_color, (0, 0, 0))
         self.text_rect = self.text_img.get_rect()
         if self.position == "left":
@@ -33,9 +39,9 @@ class Text:
             pass
         if self.position == "right":
             self.text_rect.right = self.screen_rect.right - 40
-        self.screen_rect.top = 10
+        self.text_rect.top = 8
 
     def update(self):
-        """ Рисует текст на экране """
+        """ Рисует текст на экране. """
         self.text_to_image()
         self.screen.blit(self.text_img, self.text_rect)
