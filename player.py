@@ -14,7 +14,7 @@ class Player(Sprite):
     :param screen: Окно для отрисовки игры (экземпляр класса pygame.Surface).
     """
 
-    speed = 2
+    speed = 4
 
     def __init__(self, screen: Surface):
         super(Player, self).__init__()

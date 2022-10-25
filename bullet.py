@@ -24,6 +24,8 @@ class Bullet(Sprite):
     :param player: Игрок, используется для вычисления начальной позиции пули.
     """
 
+    speed = 6
+
     def __init__(self, screen: Surface, player: Player):
         super(Bullet, self).__init__()
         self.screen = screen
@@ -33,7 +35,7 @@ class Bullet(Sprite):
         self.rect = pygame.Rect(0, 0, 2, 12)  # размер
         # self.color = 139, 195, 74  # цвет
         self.color = 255, 0, 0  # цвет
-        self.speed = 3
+        # self.speed = 3
 
         # начальное положение пули от положения игрока
         self.rect.centerx = player.rect.centerx

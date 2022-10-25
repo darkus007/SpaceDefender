@@ -18,7 +18,7 @@ class Alien(Sprite):
     :param screen: Окно для отрисовки игры (экземпляр класса pygame.Surface).
     """
 
-    speed = 0.08
+    speed = 0.4
 
     def __init__(self, screen: Surface):
         super(Alien, self).__init__()
