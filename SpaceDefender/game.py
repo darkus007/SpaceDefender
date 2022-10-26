@@ -95,6 +95,7 @@ class Game:
                 self.new()
                 self.level.show = True
                 self.level.value = self.game_level
+                Alien.speed += ALIEN_SPEED_INCREMENT  # увеличение сложности через ускорение пришельцев
             else:
                 self.aliens.update()
 
