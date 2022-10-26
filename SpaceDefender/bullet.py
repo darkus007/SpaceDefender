@@ -7,6 +7,7 @@
 import pygame
 from pygame import Surface
 from pygame.sprite import Group, Sprite
+from os.path import dirname
 
 from text import Text
 from player import Player
@@ -32,6 +33,7 @@ class Bullet(Sprite):
         super().__init__()
         self.screen = screen
         self.is_alive = True
+        self.sound = pygame.mixer.Sound(f'{dirname(__file__)}/res/laser-blast-fire.mp3')
 
         # создаем пулю
         self.rect = pygame.Rect(0, 0, 2, 12)  # размер

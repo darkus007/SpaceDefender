@@ -29,6 +29,7 @@ def events(screen, player, bullets, status):
             if event.key == pygame.K_SPACE:
                 new_bullet = Bullet(screen, player)
                 bullets.add(new_bullet)
+                new_bullet.sound.play()
 
         if event.type == pygame.KEYUP:
 
