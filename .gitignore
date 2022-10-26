@@ -1,5 +1,5 @@
 /venv
-/res/hiscore
+/SpaceDefender/res/hiscore
 .idea
 .DS_Store
 __pycache__

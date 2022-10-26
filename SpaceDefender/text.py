@@ -5,10 +5,11 @@
 
 import pygame.font
 from pygame import Surface
+from pygame.sprite import Sprite
 from typing import Literal
 
 
-class Text:
+class Text(Sprite):
     """
     Выводит информацию на экран.
 
@@ -18,20 +19,23 @@ class Text:
     :param position_x: Положение на экране по горизонтали, допустимые значения "left", "center", "right".
     :param position_y: Положение на экране по вертикали, допустимые значения "top" (по умолчанию), "center".
     :param font_size: Размер шрифта (по умолчанию 30).
+    :param show: Размер шрифта (по умолчанию 30).
     """
 
     def __init__(self, screen: Surface, prefix: str, value: int,
                  position_x: Literal["left", "center", "right"],
                  position_y: Literal["top", "center"] = "top",
-                 font_size: int = 30):
+                 font_size: int = 30, show: bool = True):
+        super().__init__()
+        self.screen = screen
+        self.prefix = prefix
         self.value = value
         self.position_x = position_x
         self.position_y = position_y
-        self.prefix = prefix
-        self.screen = screen
+        self.font = pygame.font.SysFont(None, font_size)
+        self.show = show
         self.screen_rect = self.screen.get_rect()
         self.text_color = 139, 195, 74
-        self.font = pygame.font.SysFont(None, font_size)
         self.text_to_image()
 
     def text_to_image(self):
@@ -51,5 +55,6 @@ class Text:
 
     def update(self):
         """ Рисует текст на экране. """
-        self.text_to_image()
-        self.screen.blit(self.text_img, self.text_rect)
+        if self.show:
+            self.text_to_image()
+            self.screen.blit(self.text_img, self.text_rect)

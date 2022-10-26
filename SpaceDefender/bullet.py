@@ -1,6 +1,7 @@
 """
 Модуль отвечает за создание и отображение пуль.
-Проверяет коллизию между пулями и пришельцами, при ее наличии удаляет пулю и пришельца.
+Проверяет коллизию между пулями и пришельцами, при ее наличии удаляет пулю и пришельца,
+увеличивает счет на количество удаленных пришельцев.
 """
 
 import pygame
@@ -9,6 +10,7 @@ from pygame.sprite import Group, Sprite
 
 from text import Text
 from player import Player
+from settings import BULLET_SPEED
 
 
 class Bullet(Sprite):
@@ -24,10 +26,10 @@ class Bullet(Sprite):
     :param player: Игрок, используется для вычисления начальной позиции пули.
     """
 
-    speed = 6
+    speed = BULLET_SPEED
 
     def __init__(self, screen: Surface, player: Player):
-        super(Bullet, self).__init__()
+        super().__init__()
         self.screen = screen
         self.is_alive = True
 
@@ -62,7 +64,10 @@ class Bullet(Sprite):
 
     @staticmethod
     def check_collision_and_remove_objects(aliens: Group, bullets: Group, score: Text) -> None:
-        """ Проверяет коллизию между пулями и пришельцами, при ее наличии удаляет пулю и пришельца """
+        """
+        Проверяет коллизию между пулями и пришельцами, при ее наличии удаляет пулю и пришельца,
+        увеличивает счет на количество удаленных пришельцев.
+        """
         # создает словарь Dict[bullets: aliens]; ключи True, True - означают удалять и пулю и пришельца
         collisions = pygame.sprite.groupcollide(bullets, aliens, True, True)
         score.value += len(collisions.values())  # увеличивает счет на количество пораженных пришельцев

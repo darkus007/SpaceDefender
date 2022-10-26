@@ -5,6 +5,9 @@
 import pygame
 from pygame.sprite import Group, Sprite
 from pygame import Surface
+from os.path import dirname
+
+from settings import PLAYER_SPEED
 
 
 class Player(Sprite):
@@ -14,12 +17,12 @@ class Player(Sprite):
     :param screen: Окно для отрисовки игры (экземпляр класса pygame.Surface).
     """
 
-    speed = 4
+    speed = PLAYER_SPEED
 
     def __init__(self, screen: Surface):
-        super(Player, self).__init__()
+        super().__init__()
         self.screen = screen
-        self.image = pygame.image.load('res/player.png')
+        self.image = pygame.image.load(f'{dirname(__file__)}/res/player.png')
         self.rect = self.image.get_rect()  # все объекты в виде прямоугольников
         self.screen_rect = screen.get_rect()
         self.reset()

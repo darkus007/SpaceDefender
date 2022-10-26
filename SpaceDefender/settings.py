@@ -1,0 +1,14 @@
+"""
+Модуль содержит настройки игры.
+"""
+
+FPS = 60
+SCREEN_SIZE = 700, 800
+BACKGROUND_COLOR = 0, 0, 0  # RGB
+SHOW_GAME_LEVEL_COUNTER_MAX_VALUE = 60
+
+# начальные настройки
+PLAYER_LIVES = 3
+PLAYER_SPEED = 4
+ALIEN_SPEED = 0.4
+BULLET_SPEED = 8

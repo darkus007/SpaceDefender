@@ -1,8 +1,9 @@
 """
-Запускает игру "Космический защитник"
+Модуль запускает игру "Космический защитник".
 """
 
-from game import run_game
+from SpaceDefender.game import Game
 
 if __name__ == "__main__":
-    run_game()
+    game = Game()
+    game.run()

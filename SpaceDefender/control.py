@@ -8,7 +8,10 @@ from bullet import Bullet
 
 
 def events(screen, player, bullets, status):
-    """ Обработка действий игрока. """
+    """
+    Обработка действий игрока.
+    Перемещение игрока стрелками "Влево" и "Вправо", "Пробел" - выстрел.
+    """
 
     for event in pygame.event.get():  # получаем все события
 

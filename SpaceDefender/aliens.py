@@ -4,6 +4,9 @@
 
 from pygame import Surface, image
 from pygame.sprite import Group, Sprite
+from os.path import dirname
+
+from settings import ALIEN_SPEED
 
 
 class Alien(Sprite):
@@ -18,12 +21,12 @@ class Alien(Sprite):
     :param screen: Окно для отрисовки игры (экземпляр класса pygame.Surface).
     """
 
-    speed = 0.4
+    speed = ALIEN_SPEED
 
     def __init__(self, screen: Surface):
-        super(Alien, self).__init__()
+        super().__init__()
         self.screen = screen
-        self.image = image.load('res/alien.png')
+        self.image = image.load(f'{dirname(__file__)}/res/alien.png')
         self.rect = self.image.get_rect()  # все объекты в виде прямоугольников
         self.alien_width = self.rect.width
         self.alien_height = self.rect.height
@@ -44,8 +47,8 @@ class Alien(Sprite):
     @staticmethod
     def create_aliens_army(screen: Surface, aliens_container: Group) -> None:
         """ Создает армию пришельцев. """
-        space_between_aliens_x = 4  # px
-        space_between_aliens_y = 20  # px
+        space_between_aliens_x = 4  # pixel
+        space_between_aliens_y = 20  # pixel
         rows_aliens = 4  # штук
 
         alien_width = Alien(screen).alien_width
@@ -57,7 +60,7 @@ class Alien(Sprite):
                 alien = Alien(screen)
                 alien.rect.x = gap_x + (alien.alien_width + space_between_aliens_x) * alien_number
                 alien.rect.y = alien.alien_height + (alien.alien_height + space_between_aliens_y) * alien_row
-                alien.y = alien.rect.y
+                alien.y = alien.rect.y      # переменная типа float, нужна для дальнейшего перемещения пришельца
                 aliens_container.add(alien)
 
     @staticmethod
