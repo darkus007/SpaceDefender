@@ -8,7 +8,7 @@ from os.path import isfile, dirname
 
 def get_hi_score() -> int:
     """ Читает рекорд прошлых игр из файла 'res/hiscore'. """
-    if isfile('res/hiscore'):
+    if isfile(f'{dirname(__file__)}/res/hiscore'):
         with open(f'{dirname(__file__)}/res/hiscore', 'r') as file:
             hi_score = int(file.read())
         return hi_score
